@@ -33,6 +33,8 @@ use App\Http\Controllers\PetaniWebController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\SiswaController;
 
+//delete
+Route::get('/siswa/hapus/{params}', [SiswaController::class, 'hapus']);
 //edit
 Route::get('/siswa/edit/{params}', [SiswaController::class, 'edit']);
 Route::post('/siswa/update', [SiswaController::class, 'update']);
@@ -41,7 +43,6 @@ Route::get('/siswa', [SiswaController::class, 'index']);
 //menambah data
 Route::get('/siswa/tambah', [SiswaController::class, 'tambah']);
 Route::post('/siswa/store', [SiswaController::class, 'store']);
-//edit
 
 
 Route::get('/contact', [PetaniWebController::class, 'index']);

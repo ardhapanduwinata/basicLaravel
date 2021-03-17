@@ -49,4 +49,12 @@ class SiswaController extends Controller
         //mengalihkan ke halaman siswa
         return redirect('/siswa');
     }
+
+    public function hapus($id){
+        //menghapus data siswa berdasarkan id yg dipilih
+        DB::table('siswa')->where('id', $id)->delete();
+
+        //mengalihkan ke halaman siswa
+        return redirect('/siswa');
+    }
 }
