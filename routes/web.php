@@ -32,6 +32,19 @@ use App\Http\Controllers\ordersController;
 use App\Http\Controllers\PetaniWebController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\MentorController;
+
+//Eloquent ORM CRUD
+//get all data
+Route::get('/mentor', [MentorController::class, 'index']);
+//input
+Route::get('/mentor/tambah', [MentorController::class, 'tambah']);
+Route::post('/mentor/store', [MentorController::class, 'store']);
+//edit
+Route::get('/mentor/edit/{params}', [MentorController::class, 'edit']);
+Route::put('/mentor/update/{params}', [MentorController::class, 'update']);
+//delete
+Route::get('/mentor/hapus/{params}', [MentorController::class, 'hapus']);
 
 //delete
 Route::get('/siswa/hapus/{params}', [SiswaController::class, 'hapus']);
