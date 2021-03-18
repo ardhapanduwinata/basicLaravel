@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Mentor;
 
 class MentorController extends Controller
@@ -26,7 +27,7 @@ class MentorController extends Controller
     }
 
     public function edit($id){
-        $mentor = Mentor::find($id);
+        $mentor = Mentor::where('id', $id)->get();
         return view('edit-mentor', ['mentor' => $mentor]);
     }
 

@@ -9,7 +9,7 @@ class SiswaController extends Controller
 {
     public function index(){
         // mengambil data dari tabel siswa
-        $siswa = DB::table('siswa')->get();
+        $siswa = DB::table('siswa')->paginate(10);
 
         //mengirim data siswa ke view siswa
         return view('siswa', ['siswa' => $siswa]);

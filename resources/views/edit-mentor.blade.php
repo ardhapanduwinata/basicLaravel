@@ -7,7 +7,7 @@
 <br>
 <br>
 @foreach ($mentor as $item)
-<form action="/mentor/update" method="PUT">
+<form action="/mentor/update" method="POST">
     {{ csrf_field() }}
     <input type="hidden" name="id" value="{{ $item->id }}"> <br>
     Nama <input type="text" required="required" name="nama" value="{{ $item->nama }}"> 

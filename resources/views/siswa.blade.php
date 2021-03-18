@@ -30,5 +30,10 @@
     @endforeach
 </table>
     
+<br>
+Halaman: {{ $siswa->currentPage() }} <br>
+Jumlah data: {{ $siswa->total() }} <br>
+Data Per Halaman: {{ $siswa->perPage() }} <br>
+{{ $siswa->links() }}
 @endsection
 
