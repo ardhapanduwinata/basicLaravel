@@ -60,7 +60,7 @@ Route::get('/mentor/tambah', [MentorController::class, 'tambah']);
 Route::post('/mentor/store', [MentorController::class, 'store']);
 //edit
 Route::get('/mentor/edit/{params}', [MentorController::class, 'edit']);
-Route::post('/mentor/update/{params}', [MentorController::class, 'update']);
+Route::post('/mentor/update', [MentorController::class, 'update']);
 //delete
 Route::get('/mentor/hapus/{params}', [MentorController::class, 'hapus']);
 

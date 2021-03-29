@@ -32,7 +32,7 @@ class MentorController extends Controller
     }
 
     public function update(Request $request){
-        $mentor = Mentor::where('id', $request->id)->get();
+        $mentor = Mentor::find($request->id);
 
         $mentor->nama = $request->nama;
         $mentor->umur = $request->umur;
