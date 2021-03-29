@@ -31,8 +31,8 @@ class MentorController extends Controller
         return view('edit-mentor', ['mentor' => $mentor]);
     }
 
-    public function update($id, Request $request){
-        $mentor = Mentor::find($id);
+    public function update(Request $request){
+        $mentor = Mentor::where('id', $request->id)->get();
 
         $mentor->nama = $request->nama;
         $mentor->umur = $request->umur;
