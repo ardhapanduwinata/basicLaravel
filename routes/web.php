@@ -31,8 +31,26 @@ use App\Http\Controllers\ordersController;
 
 use App\Http\Controllers\PetaniWebController;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\MentorController;
+use App\Http\Controllers\SiswaController;
+
+use App\Http\Controllers\KelasController;
+
+//relation many to many
+Route::get('/kelas', [KelasController::class, 'index']);
+
+use App\Http\Controllers\BlogAuthorController;
+
+//relation one to many
+Route::get('/blog-author', [BlogAuthorController::class, 'index']);
+
+use App\Http\Controllers\MuridController;
+
+//relation one to one
+Route::get('/murid', [MuridController::class, 'index']);
+
+//searching
+Route::get('/siswa/cari', [SiswaController::class, 'cari']);
 
 //Eloquent ORM CRUD
 //get all data

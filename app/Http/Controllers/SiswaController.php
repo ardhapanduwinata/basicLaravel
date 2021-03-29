@@ -15,12 +15,32 @@ class SiswaController extends Controller
         return view('siswa', ['siswa' => $siswa]);
     }
 
+    public function cari(Request $request){
+        //menerima kata kunci
+        $cari = $request->cari;
+
+        //mengambil data pencarian
+        $siswa = DB::table('siswa')
+        ->where('nama', 'like', '%'.$cari.'%')
+        ->paginate();
+
+        //mengirim data ke view
+        return view('siswa', ['siswa' => $siswa]);
+    }
+
     public function tambah(){
         //memanggil halaman tambah siswa
         return view('tambah-siswa');
     }
 
     public function store(Request $request){
+        // validasi data yg diinput user
+        $this->validate($request, [
+            'nama' => 'required',
+            'umur' => 'required|numeric|min:1|max:70',
+            'alamat' => 'required'
+        ]);
+
         //insert data ke table siswa
         DB::table('siswa')->insert([
             'nama' => $request->nama,
