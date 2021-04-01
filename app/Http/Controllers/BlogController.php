@@ -5,7 +5,7 @@
     class BlogController extends Controller
     {
         public function home(){
-            return view('home');
+            return view('_home');
         }
 
         public function tentang(){

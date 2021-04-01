@@ -22,7 +22,7 @@
                         <h2>Petani Blog</h2>
                             <nav>
                                 <a href="/">INDEX</a>
-                                <a href="/blog">HOME</a>
+                                <a href="/dashboard">HOME</a>
                                 <a href="/blog/tentang">TENTANG</a>
                                 <a href="/contact">CONTACT</a>
                             </nav>

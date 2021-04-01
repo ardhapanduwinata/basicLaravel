@@ -12,10 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/fastfood', function (){
     //get data from db
@@ -28,23 +27,19 @@ Route::get('/fastfood', function (){
 });
 
 use App\Http\Controllers\ordersController;
-
 use App\Http\Controllers\PetaniWebController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\SiswaController;
-
 use App\Http\Controllers\KelasController;
+use App\Http\Controllers\MuridController;
+use App\Http\Controllers\BlogAuthorController;
 
 //relation many to many
 Route::get('/kelas', [KelasController::class, 'index']);
 
-use App\Http\Controllers\BlogAuthorController;
-
 //relation one to many
 Route::get('/blog-author', [BlogAuthorController::class, 'index']);
-
-use App\Http\Controllers\MuridController;
 
 //relation one to one
 Route::get('/murid', [MuridController::class, 'index']);
@@ -77,7 +72,10 @@ Route::post('/siswa/store', [SiswaController::class, 'store']);
 
 
 Route::get('/contact', [PetaniWebController::class, 'index']);
-Route::get('/blog', [BlogController::class, 'home']);
+Route::get('/dashboard', [BlogController::class, 'home']);
 Route::get('/blog/tentang', [BlogController::class, 'tentang']);
 
 Route::get('/orders', [ordersController::class, 'index']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
