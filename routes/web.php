@@ -16,7 +16,7 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/fastfood', function (){
+Route::get('/fastfood', function () {
     //get data from db
     $menu = [
         'type' => 'Chicken Nugget',
@@ -30,10 +30,14 @@ use App\Http\Controllers\ordersController;
 use App\Http\Controllers\PetaniWebController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\MentorController;
-use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MuridController;
 use App\Http\Controllers\BlogAuthorController;
+use App\Http\Controllers\SiswaController;
+
+Route::get('siswa/print-excel', [SiswaController::class, 'printExcel']);
+
+Route::get('/siswa/print-pdf', [SiswaController::class, 'printPDF']);
 
 //relation many to many
 Route::get('/kelas', [KelasController::class, 'index']);
@@ -66,6 +70,7 @@ Route::get('/siswa/edit/{params}', [SiswaController::class, 'edit']);
 Route::post('/siswa/update', [SiswaController::class, 'update']);
 //get all
 Route::get('/siswa', [SiswaController::class, 'index']);
+Route::get('/siswa/umur/{params}', [SiswaController::class, 'filterUmur']);
 //menambah data
 Route::get('/siswa/tambah', [SiswaController::class, 'tambah']);
 Route::post('/siswa/store', [SiswaController::class, 'store']);

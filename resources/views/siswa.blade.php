@@ -18,6 +18,17 @@
 </div>
 <br>
 
+<a href="/siswa/print-pdf" class="btn-lg btn-primary" target="_blank" style="float:right; margin:2%">PRINT PDF</a>
+<a href="/siswa/print-excel" class="btn-lg btn-success" target="_blank" style="float:right; margin:2%">PRINT EXCEL</a>
+
+<form action="{{ url('siswa') }}" method="GET" >
+    Filter Umur:
+    <a href="/siswa/umur/30">30</a> |
+    <a href="/siswa/umur/34">34</a> |
+    <a href="/siswa/umur/35">35</a> |
+    <a href="/siswa">Reset</a>
+</form>
+
 <table border="1" class="table table-bodered">
     <tr>
         <th>Nama</th>

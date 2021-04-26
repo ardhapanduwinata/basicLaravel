@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDF;
+use App\Exports\SiswaExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SiswaController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         // mengambil data dari tabel siswa
         $siswa = DB::table('siswa')->paginate(10);
 
@@ -15,25 +19,46 @@ class SiswaController extends Controller
         return view('siswa', ['siswa' => $siswa]);
     }
 
-    public function cari(Request $request){
+    public function filterUmur($umur)
+    {
+        if (empty($umur)) {
+            // mengambil data dari tabel siswa
+            $siswa = DB::table('siswa')->paginate(10);
+        } else {
+            $siswa = DB::table('siswa')
+                ->where('umur', $umur)
+                ->paginate(5)
+                ->appends('umur', $umur);
+            if ($umur == "Reset") {
+                $siswa = DB::table('siswa')->paginate(10);
+            }
+        }
+
+        return view('siswa', ['siswa' => $siswa]);
+    }
+
+    public function cari(Request $request)
+    {
         //menerima kata kunci
         $cari = $request->cari;
 
         //mengambil data pencarian
         $siswa = DB::table('siswa')
-        ->where('nama', 'like', '%'.$cari.'%')
-        ->paginate();
+            ->where('nama', 'like', '%' . $cari . '%')
+            ->paginate(10);
 
         //mengirim data ke view
         return view('siswa', ['siswa' => $siswa]);
     }
 
-    public function tambah(){
+    public function tambah()
+    {
         //memanggil halaman tambah siswa
         return view('tambah-siswa');
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         // validasi data yg diinput user
         $this->validate($request, [
             'nama' => 'required',
@@ -51,7 +76,8 @@ class SiswaController extends Controller
         return redirect('/siswa');
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         //mengambil data siswa berdasarkan id yang dipilih
         $siswa = DB::table('siswa')->where('id', $id)->get();
 
@@ -59,7 +85,8 @@ class SiswaController extends Controller
         return view('edit-siswa', ['siswa' => $siswa]);
     }
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
         //update data siswa
         DB::table('siswa')->where('id', $request->id)->update([
             'nama' => $request->nama,
@@ -70,11 +97,27 @@ class SiswaController extends Controller
         return redirect('/siswa');
     }
 
-    public function hapus($id){
+    public function hapus($id)
+    {
         //menghapus data siswa berdasarkan id yg dipilih
         DB::table('siswa')->where('id', $id)->delete();
 
         //mengalihkan ke halaman siswa
         return redirect('/siswa');
+    }
+
+    public function printPDF()
+    {
+        $siswa = DB::table('siswa')->get();
+
+        view()->share(['siswa' => $siswa]);
+        $pdf = PDF::loadview('siswa-pdf', ['siswa' => $siswa]);
+
+        return $pdf->download('data-siswa-pdf');
+    }
+
+    public function printExcel()
+    {
+        return Excel::download(new SiswaExport, 'siswa.xlsx');
     }
 }
